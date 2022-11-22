@@ -8,14 +8,7 @@ import ProductNew from "./ProductNew";
 
 function Product(props) {
   const [itemsList, setItemsList] = useState([...data]);
-
   const socket = useRef();
-
-  const deleteItemHandler = (itemId) => {
-    setItemsList((prevItems) => {
-      return prevItems.filter((item) => item.id !== itemId);
-    });
-  };
 
   useEffect(() => {
     if (props.socketData.connected === true) {
@@ -64,6 +57,12 @@ function Product(props) {
       };
     }
   }, [socket, props.socketData]);
+  
+  const deleteItemHandler = (itemId) => {
+    setItemsList((prevItems) => {
+      return prevItems.filter((item) => item.id !== itemId);
+    });
+  };
 
   const filteredProduct1 = itemsList.filter((product) => {
     return product.type === "Grocery";
